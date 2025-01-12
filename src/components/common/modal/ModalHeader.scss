@@ -1,0 +1,13 @@
+@import '../../../theme/admin/colors';
+
+.modal-header {
+  display: flex;
+  min-height: 50px;
+  align-items: center;
+  padding: 12px;
+  border-bottom: 1px $border-color solid;
+
+  & > .icon {
+    margin-right: 8px;
+  }
+}

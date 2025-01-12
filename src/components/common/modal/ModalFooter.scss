@@ -1,0 +1,11 @@
+@import '../../../theme/admin/colors';
+
+.modal-footer {
+  display: flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 12px;
+  border-top: 1px $border-color solid;
+}

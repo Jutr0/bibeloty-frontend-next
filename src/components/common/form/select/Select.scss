@@ -1,0 +1,13 @@
+@import '../../../../theme/admin/colors';
+
+.select {
+  .select__control {
+    border: 1px solid $gray;
+  }
+
+  &.error {
+    .select__control {
+      border: 1px solid $error;
+    }
+  }
+}

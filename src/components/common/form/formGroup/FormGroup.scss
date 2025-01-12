@@ -1,0 +1,46 @@
+@import '../../../../theme/admin/colors';
+
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+  gap: 20px;
+
+  .form-field {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    .label {
+      color: $label-text;
+      font-size: 12px;
+      width: 20%;
+      text-align: right;
+      padding-right: 36px;
+
+      &.required::after {
+        content: '*';
+        color: $error;
+        margin-left: 4px;
+      }
+    }
+
+    .form-input {
+      width: 80%;
+
+      &.error {
+        border-color: $error;
+      }
+    }
+
+    span.error {
+      margin-left: 20%;
+      font-size: 12px;
+      width: 80%;
+      color: $error;
+      margin-top: 4px;
+    }
+  }
+}
