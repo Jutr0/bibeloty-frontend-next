@@ -1,0 +1,38 @@
+@import '../../../theme/customer/colors';
+
+.product-view {
+  padding: 128px 0;
+  display: flex;
+  gap: 64px;
+
+  .carousel-root {
+    user-select: none;
+  }
+
+  .right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .info {
+      .name {
+        font-size: 20px;
+      }
+
+      .materials {
+        font-size: 14px;
+      }
+
+      .description {
+        margin-top: 40px;
+      }
+    }
+  }
+
+
+  @media (max-width: 524px) {
+    display: flex;
+    flex-direction: column;
+    padding:24px;
+  }
+}

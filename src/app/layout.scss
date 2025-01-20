@@ -19,3 +19,8 @@ body {
   overflow: auto;
   background: $background;
 }
+
+a {
+  text-decoration: none;
+  color: $text;
+}

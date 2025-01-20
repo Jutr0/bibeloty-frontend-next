@@ -1,67 +1,37 @@
-import {useEffect, useState} from "react";
-import {useParams} from "next/navigation";
-import {buildActions} from "@/utils/actionsBuilder";
-import {useDispatch} from "react-redux";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import './page.scss';
+import Container from "@/components/common/container/Container";
+import {buildActions, get} from "@/utils/actionsBuilder";
+import ProductActions from "@/components/common/product/ProductActions";
+import ReduxProvider from "@/components/reduxProvider/ReduxProvider";
+import ImageCarousel from "@/components/common/product/ImageCarousel";
 
-const ProductView = () => {
+export async function generateStaticParams() {
+    const products = await get('products/all_ids')
 
-    const [product, setProduct] = useState({});
-    const [selectedSize, setSelectedSize] = useState();
-    const [quantity, setQuantity] = useState(1);
-    const {id} = useParams();
+    return products.map((product) => ({
+        id: product.id,
+    }));
+}
 
-    const actions = buildActions("product")
-    const dispatch = useDispatch();
+export const dynamic = 'force-static';
 
-    useEffect(() => {
-        actions.getOne(id, product => {
-            setProduct(product);
-            setSelectedSize(product.sizes[0]?.size)
-        })
-    }, []);
+const ProductView = async ({params}) => {
 
-    const addToCart = () => {
-        dispatch(addProduct({...product, selectedSize, quantity}))
-        setQuantity(1)
-    }
+    const actions = buildActions('product');
+    const product = await actions.getOne(params.id)
 
     return <Container className="product-view">
-        <Carousel autoPlay={false} showThumbs={false} emulateTouch showStatus={false}>
-            <div>
-                <img src="/images/placeholder2.webp"/>
-            </div>
-            <div>
-                <img src="/images/placeholder3.webp"/>
-            </div>
-            <div>
-                <img src="/images/placeholder4.webp"/>
-            </div>
-        </Carousel>
+        <ImageCarousel images={product.product_documents?.map(pd => pd.document)}/>
         <div className='right'>
             <div className="info">
                 <h3 className="name">{product.name}</h3>
                 <div className="materials">{product.materials?.map(m => m.name).join(", ")}</div>
                 <div className="description">{product.description}</div>
             </div>
-            <div className="actions">
-                {product.sizes?.length > 0 && <div className="size-select">
-                    <h4>ROZMIAR</h4>
-                    <div className="buttons">
-                        {product.sizes.map(size => <Button key={size.size}
-                                                           className={classnames("small", {active: selectedSize === size.size})}
-                                                           onClick={() => setSelectedSize(size.size)}
-                        >{size.size}</Button>)}
-                    </div>
-                </div>}
-                <div className="add-to-cart">
-                    <QuantitySelector
-                        value={quantity}
-                        setValue={setQuantity}
-                    />
-                    <Button onClick={addToCart}>Dodaj do koszyka</Button>
-                </div>
-                <div className='price'>{product.price} PLN</div>
-            </div>
+            <ReduxProvider>
+                <ProductActions product={product}/>
+            </ReduxProvider>
         </div>
     </Container>
 }

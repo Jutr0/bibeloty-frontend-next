@@ -1,0 +1,42 @@
+@import '../../../theme/customer/colors';
+
+.product-actions {
+
+  .size-select {
+
+    align-self: flex-end;
+    height: 100px;
+
+    h4 {
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 8px;
+
+      .button {
+        background: $gray;
+
+        &.active {
+          background: $primary;
+        }
+      }
+    }
+
+  }
+
+  .add-to-cart {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 200px;
+  }
+
+  .price {
+    margin-top: 32px;
+    font-size: 24px;
+    font-weight: 900;
+  }
+}
