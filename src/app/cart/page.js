@@ -14,7 +14,7 @@ const CartPage = () => {
         router.push('/checkout')
     }
 
-    return <Container className="cart">
+    return <Container className="cart-page">
         <h2 className="header">{isEmpty ? 'KOSZYK JEST PUSTY' : 'PRODUKTY W KOSZYKU'}</h2>
         {!isEmpty && <>
             <Button className="result" onClick={navigateToCheckout}>DO PODSUMOWANIA</Button>
